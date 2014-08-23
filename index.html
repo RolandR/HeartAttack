@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+	<head>
+		<title>
+			Heart Attack!
+		</title>
+		<style>
+			#game{
+				border: 1px #000000 solid;
+				position: absolute;
+				top: 50%;
+				margin-top: -256px;
+				left: 50%;
+				margin-left: -256px;
+				background-color: #DDDDFF;
+			}
+			body{
+				background-color: #444444;
+				font-family: sans-serif;
+			}
+			h1{
+				color: #FFFFFF;
+				font-size: 20px;
+				font-weight: normal;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Tractor Man, we need your help! Save the traffic jam from the Heart Attack!</h1>
+		<canvas id="game" width="512" height="512">
+			
+		</canvas>
+		
+		<img id="spritesImg" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABQCAYAAACpv3NFAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3ggXAhULur0Y6gAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAVMSURBVHja7VtNUuM8EH2Pyi1gBUew9/MtmYMM9pESOMhk+bFPjhBW4Rw9C1tOS9avQxiYyFUqsKVuuVstqd+zQhFB7CIIgYTqRCD8zvI3uPKrOqA6oDqgOuCqr9XVWErO90IBCDlLrQAgAEiBJgroykd0UMl5+79/uJ9q3g5v0/3b4c2rm3Ic/7sDZ4kQCYzPiHcB7phMREihHCG8m5Sn/hfc0kpkRh1ue9cJgttZ/w8PD1HnHw4H6gjQDlh5QkR3RuJojdKlwtMxOBhpxLvlBJByKAx/7WAKCieBnFJPHQFF9roRUCg/vLEM8mcMDUXtAozm04nFJNQ2UCe8K5a1F4NxqkZkmdIhahskgK7rvEKxupK2KT0EcH9/v6je1R3qy3pOEwVmwSNFPAFFECBCdTM05urRaMxTZ8lziC5rYTbyHEbcqtfyM93jvYsGdTuCEsaK15IeVD6gYoHqgOqA6oDqgMoHBNNc0QnkWZn3F80DzBYpRBCO2vd39KG0EKZX2D+K8lKcQkDPuUhVVgLJgaPqOorglt4kw4u5MbVPJymMOH6uJ5jkWPZE+YwFcNiBk5rQcCGvPVS3aSzhDISHGLH0eDNBz2BGBkCWO0CG2As5IIbjz+UTLD6gpH+H17BS4Vy4mwLcTOH4hVxCVM9ofJENo0ySDyjhBXyYPYXzS/iCc+pDbbL4gFw8H+IDcvkE3zuU8gkx+coHVD6g8gEVC1QHVAdUB1QHVAf4+IAYHo9g+uzzATl43qcjh0+QwlMO+nzCakoS4lBUAnAWhk8wEDhCpsTxvNKRkpvLM9Nw2x6CHzcFcgiV4cDFkjB9v1i6fkqFS/C0i8fPxfOfLT/jAzLxdArXfxt58ewCl8bjX6peNVqZcJAEnpYIZ/Cd5SsfUPmAmgr/e1ff91KngHLEer3mt5oCfd9L3/fStq0sHf2+70UbzkCyRJHpCJpnd5FPH0FjdNu22O12AIDdbseS/tu2FS0f0jF8Ghsd0HXd7C3X6zUdXh7OGb6kA3zz0YxMSL7ve9lsNmiaBvv9HhL4LO+TN/0Z4/f7fVAPQYHIULquA54hkONURIYvh6aNiYrpXiD63le0Pjzb7UPyTdPImLCK7n+u2y8PQJqmmYrR5ZNfccwLO3Te8J3+ckymQG+bEc9jPGyvHh6D7X33Q7yCyTaxOgH33Iv7zNd2JRDwJbAG4LQGGGHrM5ON5y1o7Pu0HZVftoaE5QU0C19kCo2L4IsPJ0W2zl/zs7ogwee0vPyKf1v8u5ng01iCLx/qhfF6rZvEpX9/UXKt1AtK1w3rwOZpAzzPDeBpT4UvgeLLaKRH1ujmZiPCs3+r9MmpsDHgKUE2ZLT70mhQZUv6TL45r39igD3n9U1kjNvN7PcCvgXpK6wBlQ+ofEAAiJTCyn+OD9DG/zVHLKG7l04BbaQBKwaZZaOxnz9PL7zdnp4/Pp6e//4dXgRJsc4jk0IBra9HJYuoKx9Cg3qkNYTUsDSEpqYXMMZvt8bowQnGePN8ZHGDBmgjtQGucz7IATehMG/bFhpWigiZCklt5HY7jPx2az1/TebK6kuPcsSik+oZMjch6kjjaZ0jsGReaoec8+IXPKa/cuf8brejpqKapnFZosUv85q74FkjDwbrQzp89cE6ccpIJui/VnHv1L08PooMfMCs/D+WmPyC8gHyHjbGsCq+kmRkIsbnMjqi2mIipfIZIadNlFHyZoK+eZ7722E3XE3Y/8iV/+RdYBVgg1nC2vgWsVflhB+560ZstTe7wwcviBf7LmCM/k8K2I+UcaXGZ7SvYAhXfl09H/AHLTLpQlN1C9cAAAAASUVORK5CYII=" />
+		<canvas id="spritesCa" width="64" height="80"></canvas>
+		
+		
+		<script type="text/javascript">
+			
+			var Render = new function(){
+				var spritesImg = document.getElementById("spritesImg");
+				var spritesCa = document.getElementById("spritesCa");
+				var spritesCo = spritesCa.getContext("2d");
+				var gameCa = document.getElementById("game");
+				var gameCo = gameCa.getContext("2d");
+				
+				copySpritesImage();
+				
+				function copySpritesImage(){
+					spritesCo.drawImage(spritesImg, 0, 0);
+				}
+				
+				function getSprite(x, y){
+					return(spritesCo.getImageData(x*16, y*16, 15, 15));
+				}
+				
+				gameCo.save();
+				gameCo.scale(2, 2);
+				gameCo.putImageData(getSprite(0, 0), 15, 15);
+				gameCo.restore();
+				
+			}
+			
+		</script>
+		
+	</body>
+</html>
