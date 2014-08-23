@@ -13,17 +13,23 @@
 				left: 50%;
 				margin-left: -256px;
 				background-color: #333366;
+				display: block;
 			}
 			body{
 				background-color: #888888;
 				font-family: sans-serif;
 			}
-			h1{
+			h1, h2{
 				color: #FFFFFF;
 				font-size: 20px;
 				font-weight: normal;
 				text-align: center;
 				text-shadow: 1px 1px #000000;
+				display: block;
+			}
+			
+			.preRender{
+				visibility: hidden;
 			}
 		</style>
 	</head>
@@ -32,9 +38,11 @@
 		<canvas id="game" width="512" height="512">
 			
 		</canvas>
+		<h2>Controls: A, D, [Space]</h2>
 		
-		<img id="spritesImg" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABQBAMAAABbkW52AAAAIVBMVEUAAAAAAAAiIiLAAAAzMzP/AABnZ2cAmgD/SEgA/+T//wAq3ob7AAAAAXRSTlMAQObYZgAAAjZJREFUSMftlsFu4jAQhiddHHf3lFQErl2eAKkvUCSr50TViKanREK59xRpT3tZiSMXhPwEfc3OjJ2SUANqpe32sAYxE/vL2J75YwLgmj5j/x2AuNwDyC3XoBD5+mJ2cQ1Y7njwO3eorS3pq4F+NwLMZtcCEL/pAcpuraVrdG3nIiMBYktvHztgCZghFjS3co5WBYqlS+rInqGoEScZAc7R6or6rzJd1NRR1LSLBCCSbYmj+UJswh3Jp6S6PdPgS+iBk5+fAqiGW8uO04Hc0Ae4vKQAHhAdSMdGQtu9kKSsKDoAJwgO7W7wwLM4j/CqBz+gRQ9UfxFGwcLxehCL2VL0QDog5yfJgIBJ5nTBttOD1J8c0UWnB7b/9fBOweRd1bwe5DjozguqasllViU5rANk44HS9gArjgB2APj6q6AlPQzq/8aScAb1D1gY1D9kv4Qemqbq7iA3EEnzA+Q67A6OAImT/UcBWYp+tW+AaNq2v8j5QeNpfyD2dlK37ZQjTNunJulHiKsOeKo59/UBUFWVrC3iM9sf5oMpRitzOtWNGScngcgsjgDNrbNpGp5idOfn5tUFI9SLM3pYJJ9+PjTxQYc6BJjQcLnmLz1J8umBTTWSxKzx91oe91xB3gdiY1ac0j/4gDjnA4NHBjVZmUgAdMDBIuPKmHGaOOCeAKQp5E0k53cLTv3IGNbBJQE3wW2Ox2nq/rPu5xBYA9ymDlAUAAK7gKir+80cQnnYh/p2JJN/+3x4AXVVDAfD+mesAAAAAElFTkSuQmCC" />
-		<canvas id="spritesCa" width="128" height="160"></canvas>
+		<img id="spritesImg" alt="" class="preRender" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABQBAMAAABbkW52AAAAIVBMVEUAAAAAAAAiIiLAAAAzMzP/AABnZ2cAmgD/SEgA/+T//wAq3ob7AAAAAXRSTlMAQObYZgAAAjZJREFUSMftlsFu4jAQhiddHHf3lFQErl2eAKkvUCSr50TViKanREK59xRpT3tZiSMXhPwEfc3OjJ2SUANqpe32sAYxE/vL2J75YwLgmj5j/x2AuNwDyC3XoBD5+mJ2cQ1Y7njwO3eorS3pq4F+NwLMZtcCEL/pAcpuraVrdG3nIiMBYktvHztgCZghFjS3co5WBYqlS+rInqGoEScZAc7R6or6rzJd1NRR1LSLBCCSbYmj+UJswh3Jp6S6PdPgS+iBk5+fAqiGW8uO04Hc0Ae4vKQAHhAdSMdGQtu9kKSsKDoAJwgO7W7wwLM4j/CqBz+gRQ9UfxFGwcLxehCL2VL0QDog5yfJgIBJ5nTBttOD1J8c0UWnB7b/9fBOweRd1bwe5DjozguqasllViU5rANk44HS9gArjgB2APj6q6AlPQzq/8aScAb1D1gY1D9kv4Qemqbq7iA3EEnzA+Q67A6OAImT/UcBWYp+tW+AaNq2v8j5QeNpfyD2dlK37ZQjTNunJulHiKsOeKo59/UBUFWVrC3iM9sf5oMpRitzOtWNGScngcgsjgDNrbNpGp5idOfn5tUFI9SLM3pYJJ9+PjTxQYc6BJjQcLnmLz1J8umBTTWSxKzx91oe91xB3gdiY1ac0j/4gDjnA4NHBjVZmUgAdMDBIuPKmHGaOOCeAKQp5E0k53cLTv3IGNbBJQE3wW2Ox2nq/rPu5xBYA9ymDlAUAAK7gKir+80cQnnYh/p2JJN/+3x4AXVVDAfD+mesAAAAAElFTkSuQmCC" />
+		
+		<canvas id="spritesCa" class="preRender" width="128" height="160"></canvas>
 		
 		
 		<script type="text/javascript">
@@ -65,11 +73,20 @@
 				}
 				
 				function renderGrid(grid){
+					gameCo.clearRect(0, 0, gameCa.width, gameCa.height);
 					for(var x = 0; x < grid.length; x++){
 						for(var y = 0; y < grid.length; y++){
-							if(grid[x][y]){
+							if(grid[x][y] && grid[x][y].sprite){
 								gameCo.putImageData(grid[x][y].sprite, x*32 + 1, y*32 + 1);
 							}
+						}
+					}
+				}
+				
+				function renderMovingThings(list){
+					for(var i in list){
+						if(list[i].getY() >= 0 && list[i].getY() < 17){
+							gameCo.putImageData(list[i].getSprite(), list[i].getX()*32 + 1, list[i].getY()*32 + 1);
 						}
 					}
 				}
@@ -105,9 +122,51 @@
 				return{
 					 getSprite: getSprite
 					,renderGrid: renderGrid
+					,renderMovingThings: renderMovingThings
 					,generateColor: generateColor
 				}
 			}
+			
+			var Key = new function(){
+			var pressedKeys = [];
+		
+			function isPressed(key){
+				for(var i in pressedKeys){
+					if(pressedKeys[i] == key){
+						return true;
+					}
+				}
+			}
+		
+			function pressKey(key){
+				if(!isPressed(key)){
+					pressedKeys.push(key);
+				}
+			}
+		
+			function releaseKey(key){
+				var u = pressedKeys.length;
+				for(var i = 0; i < u; i++){
+					if(pressedKeys[i] == key){
+						pressedKeys.splice(i, 1);
+						u--;
+						i--;
+					}
+				}
+			}
+		
+			window.onkeydown = function(event) {
+				pressKey(String.fromCharCode(event.keyCode).toLowerCase());
+			}
+		
+			window.onkeyup = function(event) {
+				releaseKey(String.fromCharCode(event.keyCode).toLowerCase());
+			}
+		
+			return{
+				isPressed: isPressed
+			}
+		}
 			
 			var Game = new function(){
 				var grid = [];
@@ -136,22 +195,27 @@
 					
 					return{
 						sprite:sprite
+						,isCar: function(){return true;}
 					}
 				}
 				
 				function Tractor(){
 					var facing;
 					var sprite;
+					
 					function changeDirection(dir){
 						facing = dir;
-						if(facing == "right"){
+						this.facing = dir;
+						if(dir == "right"){
 							sprite = Render.getSprite(0, 3);
-						} else if(facing == "left"){
+							this.sprite = Render.getSprite(0, 3); // I forgot how to JS
+						} else if(dir == "left"){
 							sprite = Render.getSprite(1, 3);
+							this.sprite = Render.getSprite(1, 3);
 						}
 					}
 					
-					changeDirection("right");
+					changeDirection("left");
 					var x = 2;
 					var y = 12;
 					
@@ -159,32 +223,125 @@
 						 sprite: sprite
 						,x: x
 						,y: y
-					};					
+						,facing: facing
+						,changeDirection:changeDirection
+						,isCar: function(){return false}
+					};
 					
 				}
 				
-				function Heart(){
-					sprite = Render.getSprite(1, 4);
+				function Heart(nx, ny){
+					var sprite = Render.getSprite(1, 4);
+					
+					var y = ny;
+					var x = nx;
+					
+					var move = function(){
+						y++;
+						
+						if(grid[x][y]){
+							if(grid[x][y].isCar()){
+								grid[x][y] = null;
+								
+								selfDestruct();
+							}
+						}
+						
+						for(var i in smokes){
+							if(smokes[i].getX() == x && smokes[i].getY() == y){
+								selfDestruct();
+								smokes[i].goAway();
+							}
+						}
+						
+						render();
+					}
+					
+					function selfDestruct(){
+						
+						move = function(){return null;};
+						step1();
+						
+						function step1(){
+							sprite = Render.getSprite(2, 4);
+							render();
+							setTimeout(step2, 300);
+						}
+						
+						function step2(){
+							sprite = Render.getSprite(3, 4);
+							render();
+							setTimeout(step3, 300);
+						}
+						
+						function step3(){
+							sprite = Render.getSprite(5, 5);
+							render();
+							x = 100;
+						}
+					}
+					
 					return {
-						 sprite: sprite
+						  getSprite: function(){return sprite;}
+						 ,move: function(){return(move())}
+						 ,selfDestruct: selfDestruct
+						 ,getX: function(){return x;}
+						 ,getY: function(){return y;}
 					};
 				}
 				
-				function Smoke(){
-					sprite = Render.getSprite(2, 3);
+				function Smoke(nx, ny){
+					var smokeSprite = Render.getSprite(2, 3);
+					
+					var y = ny;
+					var x = nx;
+					
+					function goAway(){
+						y = -10;
+					}
+					
+					var move = function(){
+						y--;
+						if(y == 10){
+							smokeSprite = Render.getSprite(3, 3);
+						} else {
+							smokeSprite = Render.getSprite(0, 4);
+						}
+						
+						
+						for(var i in hearts){
+							if(hearts[i].getX() == x && hearts[i].getY() == y){
+								hearts[i].selfDestruct();
+								goAway();
+							}
+						}
+						render();
+					}
+					
+					
 					return {
-						 sprite: sprite
+						  getSprite: function(){return smokeSprite;}
+						 ,move: function(){return move()}
+						 ,getX: function(){return x;}
+						 ,getY: function(){return y;}
+						 ,goAway: goAway
 					};
 				}
 				
-				var heart = new Heart();
-				grid[4][0] = heart;
+				
 				var tractor = new Tractor();
 				grid[tractor.x][tractor.y] = tractor;
-				var smoke = new Smoke();
-				grid[2][11] = smoke;
+				//var smoke = new Smoke();
+				//grid[2][11] = smoke;
 				populateTrafficJam();
+				updateTractor();
+				setInterval(updateTractor, 100);
 				render();
+				
+				var smokes = [];
+				var hearts = [];
+				
+				addHeart();
 				
 				function populateTrafficJam(){
 					for(var x = 0; x < 16; x++){
@@ -194,8 +351,53 @@
 					}
 				}
 				
+				function addHeart(){
+					hearts.push(new Heart(Math.floor(Math.random()*16), 0));
+					var foo = setInterval(hearts[hearts.length - 1].move, 800);
+					setTimeout(function(){clearInterval(foo);}, 15000);
+					render();
+					
+					setTimeout(addHeart, Math.random()*3000 + 500);
+				}
+				
+				document.onkeyup = function(event) {
+					if(String.fromCharCode(event.keyCode).toLowerCase() == " "){
+						smokes.push(new Smoke(tractor.x, tractor.y - 1));
+						var foo = setInterval(smokes[smokes.length - 1].move, 300);
+						setTimeout(function(){clearInterval(foo);}, 10000);
+						render();
+					}
+				}
+				
+				function updateTractor(){
+						if(Key.isPressed("d")){
+							if(tractor.facing != "right"){
+								tractor.changeDirection("right");
+							}
+							if(tractor.x < 15){
+								grid[tractor.x][tractor.y] = [];
+								tractor.x++;
+								grid[tractor.x][tractor.y] = tractor;
+							}
+						}
+						if(Key.isPressed("a")){
+							if(tractor.facing != "left"){
+								tractor.changeDirection("left");
+							}
+							if(tractor.x > 0){
+								grid[tractor.x][tractor.y] = [];
+								tractor.x--;
+								grid[tractor.x][tractor.y] = tractor;
+							}
+						}
+						render();
+						//console.log(tractor);
+				}
+				
 				function render(){
 					Render.renderGrid(grid);
+					Render.renderMovingThings(smokes);
+					Render.renderMovingThings(hearts);
 				}
 			}
 			
